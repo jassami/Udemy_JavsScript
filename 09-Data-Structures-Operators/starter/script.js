@@ -100,11 +100,14 @@ const restaurant = {
   },
   orderDelivery: function ({ starterIndex = 1, mainIndex = 0, address, time = '20:00' }) {
     console.log(`Order resieved! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be deliverd to ${address} at ${time}.`);
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Your pasta is with ${ing1}, ${ing2}, and ${ing3}`);
   }
 };
 
-restaurant.orderDelivery({ time: '22:30', address: 'George Town, 21', mainIndex: 2, starterIndex: 2 });
-restaurant.orderDelivery({ address: 'George Town, 21' });
+// restaurant.orderDelivery({ time: '22:30', address: 'George Town, 21', mainIndex: 2, starterIndex: 2 });
+// restaurant.orderDelivery({ address: 'George Town, 21' });
 
 
 
@@ -127,3 +130,38 @@ restaurant.orderDelivery({ address: 'George Town, 21' });
 // //  Nested objects
 // const { fri: { open: o, close: c } } = openingHours;
 // console.log(o, c);
+
+const arr = [7, 8, 9];
+const badArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badArr);
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
+console.log(...newArr);
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+console.log(restaurant.mainMenu);
+
+const mainMenuCopy = [...restaurant.mainMenu];
+// console.log(mainMenuCopy);
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+const str = 'Jonas';
+const letters = [...str, ' ', 's.'];
+console.log(letters);
+console.log(...str);
+
+// const ingredients = [prompt("Let's make pasta! Ingredient 1?"), prompt('ingredient 2?'), prompt('ingredient 3?')];
+// restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+// restaurant.orderPasta(...ingredients);
+
+// Objects
+const restaurantCopy = { ...restaurant };
+restaurant.name = 'Roma Cafe';
+console.log(restaurant.name);
+console.log(restaurantCopy.name);
+
+const newRestaurant = { foundedIn: 1996, ...restaurant, founder: 'Jan' };
+console.log(newRestaurant);
