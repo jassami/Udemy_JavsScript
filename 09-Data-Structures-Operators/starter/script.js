@@ -4,6 +4,15 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+const getCode = str => str.slice(0, 3).toUpperCase();
+for (const flight of flights.split('+')) {
+  const [type, from, to, time] = flight.split(';');
+  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll('_', ' ')} from ${getCode(from)} to ${getCode(to)} (${time.replace(':', 'h')})`.padStart(50);
+  console.log(output);
+}
+
+
+
 // Data needed for first part of the section
 // const restaurant = {
 //   name: 'Classico Italiano',
@@ -114,6 +123,205 @@ const restaurant = {
   }
 
 };
+
+// Strings
+const airline = 'TAP Air Portugal';
+// const plane = 'A320';
+
+// console.log(plane[0]);
+// console.log('A320'[2]);
+// console.log(airline.length);
+// console.log('B737'.length);
+// console.log(airline.indexOf('r'));
+// console.log(airline.lastIndexOf('r'));
+// console.log(airline.indexOf('Portugal'));
+// console.log(airline.indexOf('portugal'));
+
+// console.log(airline.slice(4));
+// console.log(airline.slice(4, 7));
+
+// console.log(airline.slice(0, airline.indexOf(' ')));
+// console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+// console.log(airline.slice(-2));
+// console.log(airline.slice(1, -1));
+
+// // write a function that receives an airplane seat and logs to the console whether it is a middle seat or not.
+// const checkMiddleSeat = function (seat) {
+//   const s = seat.slice(-1);
+//   if (s === 'B' || s === 'E') console.log('Yougot the middle seat :('); else console.log('You are lucky :)');
+// };
+// checkMiddleSeat('11B');
+// checkMiddleSeat('34A');
+// checkMiddleSeat('2E');
+
+// Coding Challenge #4:
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const wordArr = text.split('\n');
+//   let count = 1;
+//   for (const line of wordArr) {
+//     const [first, second] = line.trim().toLowerCase().split('_');
+//     const outPut = `${first}${second.replace(second[0], second[0].toUpperCase())}`
+//     // console.log(`${first}${second[0].toUpperCase()}${second.slice(1)}`);
+//     // console.log(`${first}${second.replace(second[0], second[0].toUpperCase())}`);
+//     console.log(outPut.padEnd(20, ' ') + '*'.repeat(count));
+//     count++;
+//   };
+// });
+
+
+// const camelCase= function([var1, var2,])
+
+
+
+// // strings part 3:
+// console.log('a+very+nice+string'.split('+'));
+// console.log('jay second'.split(' '));
+// const [firstName, lastName] = 'jane two'.split(' ');
+// const newName = ['Mr.', firstName, lastName.toUpperCase()];
+// console.log(newName.join(' '));
+
+// // eg:
+// const capitalizeName = function (name) {
+//   const names = name.split(' ');
+//   const namesUpper = [];
+//   for (const n of names) {
+//     // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+//     namesUpper.push(n.replace(n[0], n[0].toUpperCase()))
+//   };
+//   console.log(namesUpper.join(' '));
+// };
+// capitalizeName('jane sam one');
+
+// // padding
+// const maskCreditCard = function (number) {
+//   const str = number + '';
+//   const last = str.slice(-4);
+//   return last.padStart(str.length, '*');
+// };
+// console.log(maskCreditCard(23456789));
+// console.log(maskCreditCard('23456789'));
+// console.log(maskCreditCard(2903475675849));
+
+// // Repeat
+// const message2 = 'Bad weather... All Departures Delayed... ';
+// console.log(message2.repeat(5));
+
+
+
+// strings part 2:
+
+// console.log(airline.toLowerCase());
+// console.log(airline.toUpperCase());
+
+// const passenger = 'jOnAS';
+// const passengerLower = passenger.toLowerCase();
+// const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerCorrect);
+
+// // compare emails:
+// const email = 'hello@jonas.io';
+// const loginEmail = '   Hello@Jonas.Io \n';
+// const normalizedEmail = loginEmail.toLowerCase().trim();
+// console.log(normalizedEmail);
+// console.log(normalizedEmail === email);
+
+// const priceGB = '288,97&';
+// const priceUS = priceGB.replace('&', '$').replace(',', '.');
+// console.log(priceUS);
+
+// const announcement = 'All passenger come to boarding door 23, door 23';
+// console.log(announcement.replaceAll('door', 'gate'));
+// console.log(announcement.replace(/door/g, 'gate'));
+
+// // booleans
+// const plane = 'Airbus A320neo';
+// console.log(plane.includes('A32'));
+// console.log(plane.startsWith('Airb'));
+// if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+//   console.log('The plane is part of the new family');
+// };
+
+// // example
+// const checkBaggage = function (items) {
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('You are NOT allowed on board');
+//   } else {
+//     console.log('Welcome aboard!');
+//   }
+// };
+
+// checkBaggage('I have a laptop, Food and a Knife');
+// checkBaggage('Socks and camera');
+// checkBaggage('Got some snacks and a gun for protection');
+
+
+
+
+
+
+// maps:
+
+// const rest = new Map();
+// rest.set('name', 'Classico Italiano');
+// rest.set(1, 'Firenze, Italy')
+// console.log(rest.set(2, 'Lisbon, Potugal'));
+// // Chaining:
+// rest.set('catigories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic']).set('open', 11).set('close', 23).set(true, 'We are open').set(false, "We are closed");
+// console.log(rest);
+// console.log(rest.get('name'));
+// console.log(rest.get(true));
+// console.log(rest.get(false));
+// console.log(rest.get(1));
+
+// const time = 21;
+// console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+// console.log(rest.has('catigories'));
+// rest.delete(2);
+// console.log(rest.size);
+// // rest.set([1, 2], 'Test');
+// // console.log(rest);
+// // to get the value of the array, we must do the following in set and get:
+// const arr = [1, 2];
+// rest.set(arr, 'Test');
+// console.log(rest.get(arr));
+// rest.set(document.querySelector('h1'), 'Heading');
+
+// const questions = new Map([
+//   ['question', 'What is the best programming language in the world?'],
+//   [1, 'c'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct'],
+//   [false, 'Try again!'],
+// ]);
+// console.log(questions);
+
+// // convert object to map
+// console.log(Object.entries(openingHours));
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);
+
+// console.log(questions.get('question'));
+// for (const [key, value] of questions) {
+//   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+// };
+// // const answer = Number(prompt('Your answer'));
+// const answer = 3;
+// console.log(answer);
+// // answer === questions.get('correct') ? console.log(questions.get(true)) : console.log(questions.get(false));
+// console.log(questions.get(questions.get('correct') === answer));
+
+// // convert a map to an array:
+// console.log([...questions]);
+// console.log([...questions.keys()]);
+// console.log([...questions.values()]);
+
 
 
 // proprety names:
@@ -406,5 +614,51 @@ const game = {
 // };
 // console.log(scorers);
 
+// Sets 
+// const ordersSet = new Set(['pizza', 'pizza', 'pasta', 'risotto', 'pasta']);
+// console.log(ordersSet);
+// console.log(new Set('Jonas'));
+// console.log(ordersSet.size);
+// console.log(ordersSet.has('pizza'));
+// console.log(ordersSet.has('bread'));
+// ordersSet.add('Garlic Bread');
+// ordersSet.delete('Risotto');
+// console.log(ordersSet);
+// // ordersSet.clear();
+// const staff = ['waiter', 'chef', 'chef', 'manager', 'waiter'];
+// const staffUnique = new Set(staff);
+// console.log(staffUnique);
+// console.log(new Set('jassami').size);
 
 
+// Coding Challenge #3:
+
+// const gameEvents = new Map([
+//   [17, '⚽ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽ GOAL'],
+//   [80, '⚽ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+
+// // 1. Create an array 'events' of the different game events that happened.
+// console.log([...new Set(gameEvents.values())]);
+
+// // 2.
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// // 3. 
+// const time = [...gameEvents.keys()].pop();
+// console.log(`An event happened, on average, every ${time / gameEvents.size} minutes.`);
+
+// // 4. 
+// for (const [key, value] of gameEvents) {
+//   key <= 45 ? console.log(`[FIRST HALF] ${key}: ${value}`) : console.log(`[SECOND HALF] ${key}: ${value}`);
+// };
