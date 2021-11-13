@@ -9,7 +9,8 @@ for (const flight of flights.split('+')) {
   const [type, from, to, time] = flight.split(';');
   const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll('_', ' ')} from ${getCode(from)} to ${getCode(to)} (${time.replace(':', 'h')})`.padStart(50);
   console.log(output);
-}
+};
+
 
 
 
@@ -125,7 +126,7 @@ const restaurant = {
 };
 
 // Strings
-const airline = 'TAP Air Portugal';
+// const airline = 'TAP Air Portugal';
 // const plane = 'A320';
 
 // console.log(plane[0]);
