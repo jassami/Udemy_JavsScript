@@ -359,6 +359,45 @@ btnSort.addEventListener('click', function (e) {
 // const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 // console.log(avg1, avg2);
 
+// Coding challenge #4:
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+// 1.
+console.log(dogs);
+dogs.forEach(dog => (dog.recoFood = Math.trunc(dog.weight ** 0.75 * 28)));
+console.log(dogs);
+// // 2.
+const saraDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(`Sarah's dog is eating ${saraDog.curFood > saraDog.recoFood ? 'more' : less} than the recommended food`);
+console.log(dogs);
+// // // // 3.
+const eat2Much = dogs.filter(dog => dog.curFood > dog.recoFood).map(dog => dog.owners).flat();
+console.log(eat2Much);
+
+const eatless = dogs.filter(dog => dog.curFood < dog.recoFood).flatMap(dog => dog.owners);
+console.log(eatless);
+// // // // 4.
+console.log(`Dogs of ${eat2Much.join(' and ')} eat too much`);
+console.log(`${eatless.join(' and ')}'s dog eat too little`);
+console.log(dogs);
+// 5.
+const right = dogs.some(dog => dog.curFood === dog.recoFood)
+console.log(right);
+// 6.
+console.log(dogs.some(dog => dog.curFood > dog.recoFood * 0.9 && dog.curFood < dog.recoFood * 1.1));
+console.log(dogs.filter(dog => dog.curFood > dog.recoFood * 0.9 && dog.curFood < dog.recoFood * 1.1));
+
+const dogsCopy = dogs.slice();
+console.log(dogsCopy);
+console.log(dogsCopy.map(dog => dog.recoFood).sort((a, b) => a - b));
+
+
+
 // chaining methods
 
 // const eurToUsd = 1.1;
