@@ -182,9 +182,27 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogoutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(Math.trunc(time % 60)).padStart(2, 0);
+    labelTimer.textContent = `${min}: ${sec}`;
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+    time--;
+  };
+  let time = 30;
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+}
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // Fake always loged in (to add the dates on the UI)
 currentAccount = account1;
@@ -234,7 +252,9 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
-
+    // timer
+    if (timer) clearInterval(timer);
+    timer = startLogoutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -264,6 +284,9 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movementsDates.push(new Date().toISOString());
     receiverAcc.movementsDates.push(new Date().toISOString());
     updateUI(currentAccount);
+    // reset timer
+    clearInterval(timer);
+    timer = startLogoutTimer();
   }
 });
 
@@ -283,6 +306,9 @@ btnLoan.addEventListener('click', function (e) {
       updateUI(currentAccount);
     }, 2500);
   }
+  // reset timer
+  clearInterval(timer);
+  timer = startLogoutTimer();
   inputLoanAmount.value = '';
 });
 
@@ -436,10 +462,10 @@ btnSort.addEventListener('click', function (e) {
 // console.log(navigator.language, new Intl.NumberFormat('en-US', options).format(num));
 
 //  setTimeout
-const ingrediants = ['olives', 'spinach'];
-const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}!`), 3000, ...ingrediants);
-console.log(`waiting...`);
-if (ingrediants.includes('spinach')) clearTimeout(pizzaTimer);
+// const ingrediants = ['olives', 'spinach'];
+// const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}!`), 3000, ...ingrediants);
+// console.log(`waiting...`);
+// if (ingrediants.includes('spinach')) clearTimeout(pizzaTimer);
 
 // setInterval
 // setInterval(function () {
