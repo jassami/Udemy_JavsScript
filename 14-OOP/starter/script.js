@@ -142,6 +142,231 @@
 // steven.birthYear = 2002;
 // steven.calcAge();
 
+
+
+// class PersonCl {
+//     constructor(fullName, birthYear) {
+//         this.fullName = fullName;
+//         this.birthYear = birthYear;
+//     }
+//     // Instance methods
+//     // Methods will ba added to the .prototype property
+//     calcAge() {
+//         console.log(2037 - this.birthYear);
+//     }
+//     greet() {
+//         console.log(`Hey ${this.fullName}`);
+//     }
+
+//     get age() {
+//         return 2037 - this.birthYear;
+//     }
+//     set fullName(name) {
+//         console.log(name);
+//         if (name.includes(' ')) this._fullName = name;
+//         else alert(`${name} is not a full name!`)
+//     }
+//     get fullName() {
+//         return this._fullName;
+//     }
+//     // Static method
+//     static hey() {
+//         console.log('Hey there 👋');
+//         console.log(this);
+//     }
+// };
+
+// class StudentCl extends PersonCl {
+//     constructor(fullName, birthYear, course) {
+//         super(fullName, birthYear);
+//         this.course = course;
+//     }
+//     interduce() {
+//         console.log(`My name is ${this.fullName} and I study ${this.course}`);
+//     }
+//     calcAge() {
+//         console.log(`I'm ${2037 - this.birthYear} years old, but i feel more like ${2037 - this.birthYear + 10}`);
+//     }
+// };
+
+// // const martha = new StudentCl('Martha Jones', 2012);
+// const martha = new StudentCl('Martha Jones', 2012, 'Computer science');
+// console.log(martha);
+// martha.interduce();
+// martha.calcAge();
+
+
+// const PersonProto = {
+//     calcAge() {
+//         console.log(2037 - this.birthYear);
+//     },
+//     init(firstName, birthYear) {
+//         this.firstName = firstName;
+//         this.birthYear = birthYear;
+//     },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// const StudentProto = Object.create(PersonProto);
+// StudentProto.init = function (firstName, birthYear, course) {
+//     PersonProto.init.call(this, firstName, birthYear);
+//     this.course = course;
+// };
+
+// StudentProto.interduce = function () {
+//     console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// }
+
+// const jay = Object.create(StudentProto);
+// jay.init('Jay', 2010, 'Computer Science');
+// jay.interduce();
+// jay.calcAge();
+
+
+// const Person = function (firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+// };
+
+// Person.prototype.calcAge = function () {
+//     console.log(2037 - this.birthYear);
+// };
+
+// const Student = function (firstName, birthYear, course) {
+//     Person.call(this, firstName, birthYear);
+//     this.course = course;
+// };
+
+// Student.prototype = Object.create(Person.prototype);
+
+// Student.prototype.interduce = function () {
+//     console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// }
+
+// const mike = new Student('Mike', 2020, 'Computer Science');
+// mike.interduce();
+// mike.calcAge();
+
+// console.log(mike.__proto__);
+// console.log(mike.__proto__.__proto__);
+
+// console.log(mike instanceof Student);
+// console.log(mike instanceof Person);
+// console.log(mike instanceof Object);
+
+// Student.prototype.constructor = Student;
+// console.log(Student.prototype.constructor);
+
+
+
+// class Account {
+//     constructor(owner, currency, pin) {
+//         this.owner = owner;
+//         this.currency = currency;
+//         this._pin = pin;
+//         this._movements = [];
+//         this.locale = navigator.language;
+
+//         console.log(`Thank you for opening an account ${owner}`);
+//     }
+//     // Publis interface
+//     getMovements() {
+//         return this._movements;
+//     }
+
+//     deposit(val) {
+//         this._movements.push(val);
+//     }
+//     withdraw(val) {
+//         this.deposit(-val);
+//     }
+//     approveLoan(val) {
+//         return true;
+//     }
+//     requestLoan(val) {
+//         if (this.approveLoan(val)) {
+//             this.deposit(val);
+//             console.log(`Loan Approved for $${val}`);
+//         }
+//     }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+
+
+// console.log(acc1);
+
+
+// Truly private classes and methods:
+
+// class Account {
+//     // 1- public fields
+//     locale = navigator.language;
+
+//     // 2- Private fileds
+//     #movements = [];
+//     #pin;
+//     constructor(owner, currency, pin) {
+//         this.owner = owner;
+//         this.currency = currency;
+//         this.#pin = pin;
+//         // this._movements = [];
+//         // this.locale = navigator.language;
+
+//         console.log(`Thank you for opening an account ${owner}`);
+//     }
+//     // 3- public methods
+//     // Publis interface
+//     getMovements() {
+//         return this.#movements;
+//     }
+
+//     deposit(val) {
+//         this.#movements.push(val);
+//         return this;
+//     }
+//     withdraw(val) {
+//         this.deposit(-val);
+//         return this;
+//     }
+//     // There is also the static version of them all, the four
+//     static helper() {
+//         console.log('Helper');
+//     }
+//     // 4- Private methods
+//     // #approveLoan(val) {
+//     _approveLoan(val) {
+//         return true;
+//     }
+//     requestLoan(val) {
+//         if (this._approveLoan(val)) {
+//             this.deposit(val);
+//             console.log(`Loan Approved for $${val}`);
+//             return this;
+//         }
+//     }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+
+// Account.helper();
+// console.log(acc1);
+// // console.log(acc1.#movements);
+// // console.log(acc1.#pin);
+// // console.log(acc1.#approveLoan);
+
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// console.log(acc1.getMovements());
+
+
+
 // Coding chalenge #1
 // Data car 1: 'BMW' going at 120 km/h
 // Data car 2: 'Mercedes' going at 95 km/h
@@ -197,42 +422,7 @@
 // console.log(ford);
 
 
-// const Person = function (firstName, birthYear) {
-//     this.firstName = firstName;
-//     this.birthYear = birthYear;
-// };
-
-// Person.prototype.calcAge = function () {
-//     console.log(2037 - this.birthYear);
-// };
-
-// const Student = function (firstName, birthYear, course) {
-//     Person.call(this, firstName, birthYear);
-//     this.course = course;
-// };
-
-// Student.prototype = Object.create(Person.prototype);
-
-// Student.prototype.interduce = function () {
-//     console.log(`My name is ${this.firstName} and I study ${this.course}`);
-// }
-
-// const mike = new Student('Mike', 2020, 'Computer Science');
-// mike.interduce();
-// mike.calcAge();
-
-// console.log(mike.__proto__);
-// console.log(mike.__proto__.__proto__);
-
-// console.log(mike instanceof Student);
-// console.log(mike instanceof Person);
-// console.log(mike instanceof Object);
-
-// Student.prototype.constructor = Student;
-// console.log(Student.prototype.constructor);
-
-
-// Coding Challenge#3
+// // Coding Challenge#3
 
 // const Car = function (make, speed) {
 //     this.make = make;
@@ -273,110 +463,49 @@
 // tesla.chargeBattery(50);
 
 
-
-class PersonCl {
-    constructor(fullName, birthYear) {
-        this.fullName = fullName;
-        this.birthYear = birthYear;
+// Coding Challenge#4:
+class CarCl {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
     }
-    // Instance methods
-    // Methods will ba added to the .prototype property
-    calcAge() {
-        console.log(2037 - this.birthYear);
+    accelerate() {
+        this.speed += 10;
+        console.log(`This ${this.make} is going ${this.speed} km/hour.`);
     }
-    greet() {
-        console.log(`Hey ${this.fullName}`);
+    break() {
+        this.speed -= 5;
+        console.log(this.speed);
+        return this;
     }
-
-    get age() {
-        return 2037 - this.birthYear;
+    get speedUS() {
+        return this.speed / 1.6;
     }
-    set fullName(name) {
-        console.log(name);
-        if (name.includes(' ')) this._fullName = name;
-        else alert(`${name} is not a full name!`)
-    }
-    get fullName() {
-        return this._fullName;
-    }
-    // Static method
-    static hey() {
-        console.log('Hey there 👋');
-        console.log(this);
+    set speedUS(speed) {
+        this.speed = speed * 1.6;
     }
 };
 
-class StudentCl extends PersonCl {
-    constructor(fullName, birthYear, course) {
-        super(fullName, birthYear);
-        this.course = course;
+class EVCl extends CarCl {
+    #charge
+    constructor(make, speed, charge) {
+        super(make, speed);
+        this.#charge = charge;
     }
-    interduce() {
-        console.log(`My name is ${this.fullName} and I study ${this.course}`);
+    chargeBattery(chargeTo) {
+        this.#charge = chargeTo;
+        console.log(`Charge is ${this.#charge}`);
+        return this;
     }
-    calcAge() {
-        console.log(`I'm ${2037 - this.birthYear} years old, but i feel more like ${2037 - this.birthYear + 10}`);
+    accelerate() {
+        this.speed += 20;
+        this.#charge -= 1;
+        console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.#charge}`);
+        return this;
     }
 };
 
-// const martha = new StudentCl('Martha Jones', 2012);
-const martha = new StudentCl('Martha Jones', 2012, 'Computer science');
-console.log(martha);
-martha.interduce();
-martha.calcAge();
-
-
-const PersonProto = {
-    calcAge() {
-        console.log(2037 - this.birthYear);
-    },
-    init(firstName, birthYear) {
-        this.firstName = firstName;
-        this.birthYear = birthYear;
-    },
-};
-
-const steven = Object.create(PersonProto);
-
-const StudentProto = Object.create(PersonProto);
-StudentProto.init = function (firstName, birthYear, course) {
-    PersonProto.init.call(this, firstName, birthYear);
-    this.course = course;
-};
-
-StudentProto.interduce = function () {
-    console.log(`My name is ${this.firstName} and I study ${this.course}`);
-}
-
-const jay = Object.create(StudentProto);
-jay.init('Jay', 2010, 'Computer Science');
-jay.interduce();
-jay.calcAge();
-
-
-
-class Account {
-    constructor(owner, currency, pin) {
-        this.owner = owner;
-        this.currency = currency;
-        this.pin = pin;
-        this.movements = [];
-        this.locale = navigator.language;
-
-        console.log(`Thank you for opening an account ${owner}`);
-    }
-    // Publis interface
-    deposit(val) {
-        this.movements.push(val);
-    }
-    withdraw(val) {
-        this.deposit(-val);
-    }
-}
-
-const acc1 = new Account('Jonas', 'EUR', 1111);
-acc1.deposit(250);
-acc1.withdraw(140);
-
-console.log(acc1);
-
+const rivian = new EVCl('Rivian', 120, 23);
+console.log(rivian);
+rivian.accelerate().accelerate().accelerate().break().chargeBattery(50).accelerate();
+console.log(rivian.speedUS);
